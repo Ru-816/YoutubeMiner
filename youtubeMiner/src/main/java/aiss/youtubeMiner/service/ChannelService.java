@@ -1,6 +1,7 @@
 package aiss.youtubeMiner.service;
 
 import aiss.youtubeMiner.model.channel.Channel;
+import aiss.youtubeMiner.model.videoSnippet.VideoSnippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -26,8 +27,13 @@ public class ChannelService {
         return Arrays.stream(channels).toList();
     }
 
-    public void postChannel(String name, String maxVideos, String maxComments, String token){
+    public void getChannelAllInfo(String name, String maxVideos, String maxComments, String token){
         Channel canal = listChannelByTitle(name,token);
+        List<VideoSnippet> videosDelCanal =
+        for(int i;i<videosDelCanal.size();i++){
+
+        }
+        canal.setVideos(videosDelCanal);
         String uriVideoMiner = "http://localhost:8080/videominer/channels/"+canal.getId()+"?maxVideos="+maxVideos+"&maxComments="+maxComments;
         restTemplate.postForObject(uriVideoMiner, canal, Channel.class);
         canal.getVideos();

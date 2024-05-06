@@ -1,8 +1,7 @@
 package aiss.youtubeMiner.service;
 
-import aiss.videominer.model.Channel;
+import aiss.youtubeMiner.model.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

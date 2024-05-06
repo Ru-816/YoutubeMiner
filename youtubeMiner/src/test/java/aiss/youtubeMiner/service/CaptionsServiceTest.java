@@ -23,10 +23,4 @@ public class CaptionsServiceTest {
         assertFalse(captions.isEmpty(), "The list of captions is empty");
     }
 
-    @Test
-    @DisplayName("New caption")
-    void newCaption(){
-        List<Caption> captions = service.listCaptions("UOUBW8bkjQ4","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
-        assertFalse(captions.isEmpty(), "The list of captions is empty");
-    }
 }

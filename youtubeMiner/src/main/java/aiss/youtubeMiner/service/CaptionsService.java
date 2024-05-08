@@ -17,7 +17,7 @@ public class CaptionsService {
     @Autowired
     RestTemplate restTemplate;
 
-    public List<Caption> listCaptions(String videoId, String token){
+    public List<Caption> listCaptionsByVideoId(String videoId, String token){
         String uri = "https://www.googleapis.com/youtube/v3/captions?part=snippet&videoId="+videoId+"&key="+token;
         Caption[] captions = restTemplate.getForObject(uri, Caption[].class);
         return Arrays.stream(captions).toList();

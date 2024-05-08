@@ -25,6 +25,12 @@ public class CommentsService {
         return Arrays.stream(comments).toList();
     }
 
+    public List<Comment> listCommentsByVideoId(String videoId, String token, String maxComments){
+        String uri = "https://www.googleapis.com/youtube/v3/commentThreads?maxResults="+maxComments+"&key="+token+"&part=snippet&videoId="+videoId;
+        Comment[] comments = restTemplate.getForObject(uri, Comment[].class);
+        return Arrays.stream(comments).toList();
+    }
+
 
 }
 

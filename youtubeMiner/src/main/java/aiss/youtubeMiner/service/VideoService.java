@@ -20,8 +20,8 @@ public class VideoService {
         return Arrays.stream(videos).toList();
     }
 
-    public List<VideoSnippet> listVideoByChannelId(String channelId, String token) {
-        String uri = "https://www.googleapis.com/youtube/v3/search?key="+token+"&part=snippet&channelId="+channelId+"&maxResults=10&type=video";
+    public List<VideoSnippet> listVideoByChannelId(String channelId, String token, String maxVideos) {
+        String uri = "https://www.googleapis.com/youtube/v3/search?key="+token+"&part=snippet&channelId="+channelId+"&maxResults="+maxVideos+"&type=video";
         VideoSnippet[] videos = restTemplate.getForObject(uri, VideoSnippet[].class);
         return Arrays.stream(videos).toList();
     }

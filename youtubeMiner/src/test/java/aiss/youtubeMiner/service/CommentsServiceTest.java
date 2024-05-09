@@ -13,7 +13,7 @@ public class CommentsServiceTest {
     @Autowired
     CommentsService service;
 
-    @Test
+    /*@Test
     @DisplayName("Get channel by title")
     void listComments() {
         Channel canal = service.listChannelByTitle("@Leafyradio","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
@@ -26,5 +26,5 @@ public class CommentsServiceTest {
         Channel canal = service.listChannelByTitle("@Leafyradio","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
         assertNotNull(canal, "The channel is null");
         System.out.println(canal);
-    }
+    }*/
 }

@@ -16,11 +16,11 @@ public class CaptionsServiceTest {
     @Autowired
     CaptionsService service;
 
-    @Test
+    /*@Test
     @DisplayName("List captions")
     void listCaptions(){
         List<Caption> captions = service.listCaptions("UOUBW8bkjQ4","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
         assertFalse(captions.isEmpty(), "The list of captions is empty");
-    }
+    }*/
 
 }

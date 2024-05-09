@@ -1,6 +1,6 @@
 package aiss.youtubeMiner.service;
 
-import aiss.youtubeMiner.model.channel.Channel;
+import aiss.youtubeMiner.model.youtube.channel.Channel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,5 @@
 
-package aiss.youtubeMiner.model.comment;
+package aiss.youtubeMiner.model.youtube.comment;
 
 import com.fasterxml.jackson.annotation.*;
 

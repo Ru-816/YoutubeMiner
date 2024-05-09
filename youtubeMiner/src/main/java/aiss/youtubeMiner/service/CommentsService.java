@@ -1,7 +1,7 @@
 package aiss.youtubeMiner.service;
 
 
-import aiss.youtubeMiner.model.comment.Comment;
+import aiss.youtubeMiner.model.youtube.comment.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 

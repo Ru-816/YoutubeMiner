@@ -1,6 +1,6 @@
 package aiss.youtubeMiner.service;
 
-import aiss.youtubeMiner.model.caption.Caption;
+import aiss.youtubeMiner.model.youtube.caption.Caption;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

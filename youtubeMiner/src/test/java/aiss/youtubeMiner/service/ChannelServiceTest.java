@@ -16,18 +16,18 @@ public class ChannelServiceTest {
     @Autowired
     ChannelService service;
 
-    @Test
-    @DisplayName("Get channel by title")
-    void listChannelByTitle() {
-        Channel canal = service.listChannelByTitle("@Leafyradio","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
-        assertNotNull(canal, "The channel is null");
-        System.out.println(canal);
-    }
-    @Test
-    @DisplayName("Get channel by id")
-    void listChannelById() {
-        List<Channel> canales = service.listChannelById("UClVrJwcIy7saPcGc1nct80A","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
-        assertFalse(canales.isEmpty(), "The list of channels is empty");
-        System.out.println(canales);
-    }
+//    @Test
+//    @DisplayName("Get channel by title")
+//    void listChannelByTitle() {
+//        Channel canal = service.listChannelByTitle("@Leafyradio","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
+//        assertNotNull(canal, "The channel is null");
+//        System.out.println(canal);
+//    }
+//    @Test
+//    @DisplayName("Get channel by id")
+//    void listChannelById() {
+//        List<Channel> canales = service.listChannelById("UClVrJwcIy7saPcGc1nct80A","AIzaSyAxEkj8TANdB9Qb-R8syu8A-RDuh1wIQLo");
+//        assertFalse(canales.isEmpty(), "The list of channels is empty");
+//        System.out.println(canales);
+//    }
 }

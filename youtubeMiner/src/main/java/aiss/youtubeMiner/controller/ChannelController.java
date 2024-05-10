@@ -16,16 +16,16 @@ public class ChannelController {
     @Autowired
     ChannelService channelService;
 
-    @GetMapping("/channels/{name}")
-    public Channel findById(@PathVariable String name, String maxVideos, String maxComments, String token) {
-        Channel channel = channelService.getChannelAllInfo(name, maxVideos, maxComments, token);
+    @GetMapping("/channels/{id}")
+    public Channel findById(@PathVariable String id, String maxVideos, String maxComments, String token) {
+        Channel channel = channelService.getChannelAllInfo(id, maxVideos, maxComments, token);
         return channel;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/channels/{name}")
-    public void create(@PathVariable String name, String maxVideos, String maxComments, String token) {
-        channelService.postChannel(name, maxVideos, maxComments, token);
+    @PostMapping("/channels/{id}")
+    public void create(@PathVariable String id, String maxVideos, String maxComments, String token) {
+        channelService.postChannel(id, maxVideos, maxComments, token);
     }
 
 }

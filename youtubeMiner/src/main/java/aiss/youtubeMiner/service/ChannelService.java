@@ -32,14 +32,15 @@ public class ChannelService {
         return channel;
     }
 
-    public List<Channel> listChannelById(String id, String token) {
+    public Channel listChannelById(String id, String token) {
         String uri = "https://www.googleapis.com/youtube/v3/channels?key="+token+"&part=snippet&id="+id;
-        Channel[] channels = restTemplate.getForObject(uri, Channel[].class);
-        return Arrays.stream(channels).toList();
+        // Channel[] channels = restTemplate.getForObject(uri, Channel[].class);
+        Channel channel = restTemplate.getForObject(uri, Channel.class);
+        return channel;
     }
 
     public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token){
-        Channel canal = listChannelById(channelId,token).get(0);
+        Channel canal = listChannelById(channelId,token);
         List<VideoSnippet> videosDelCanal = videoService.listVideoByChannelId(canal.getId(), token, maxVideos);
         for(VideoSnippet video: videosDelCanal){
             List<Comment> comentarios = commentsService.listCommentsByVideoId(video.getId().getVideoId(), token, maxComments);

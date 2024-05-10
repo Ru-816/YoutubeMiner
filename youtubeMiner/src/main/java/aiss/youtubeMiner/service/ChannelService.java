@@ -1,5 +1,6 @@
 package aiss.youtubeMiner.service;
 
+import aiss.youtubeMiner.exception.ChannelNotFoundException;
 import aiss.youtubeMiner.model.videominer.User;
 import aiss.youtubeMiner.model.videominer.Video;
 import aiss.youtubeMiner.model.youtube.caption.Caption;
@@ -32,16 +33,20 @@ public class ChannelService {
         return channel;
     }
 
-    public List<Channel> listChannelById(String id, String token) {
+    public List<Channel> listChannelById(String id, String token) throws ChannelNotFoundException{
         String uri = "https://www.googleapis.com/youtube/v3/channels?key="+token+"&part=snippet&id="+id;
         Channel[] channels = restTemplate.getForObject(uri, Channel[].class);
-        return Arrays.stream(channels).toList();
+        List<Channel> channelsList= Arrays.stream(channels).toList();
+        if(channelsList.isEmpty()) {
+            throw new ChannelNotFoundException();
+        }
+        return channelsList;
     }
 
-    public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token){
-        Channel canal = listChannelById(channelId,token).get(0);
+    public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token) {
+        Channel canal = listChannelById(channelId, token).get(0);
         List<VideoSnippet> videosDelCanal = videoService.listVideoByChannelId(canal.getId(), token, maxVideos);
-        for(VideoSnippet video: videosDelCanal){
+        for (VideoSnippet video : videosDelCanal) {
             List<Comment> comentarios = commentsService.listCommentsByVideoId(video.getId().getVideoId(), token, maxComments);
             video.setComments(comentarios);
             List<Caption> subtitulos = captionsService.listCaptionsByVideoId(video.getId().getVideoId(), token);

@@ -38,8 +38,8 @@ public class ChannelService {
         return Arrays.stream(channels).toList();
     }
 
-    public Channel getChannelAllInfo(String name, String maxVideos, String maxComments, String token){
-        Channel canal = listChannelByTitle(name,token);
+    public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token){
+        Channel canal = listChannelById(channelId,token).get(0);
         List<VideoSnippet> videosDelCanal = videoService.listVideoByChannelId(canal.getId(), token, maxVideos);
         for(VideoSnippet video: videosDelCanal){
             List<Comment> comentarios = commentsService.listCommentsByVideoId(video.getId().getVideoId(), token, maxComments);
@@ -51,8 +51,8 @@ public class ChannelService {
         return canal;
     }
 
-    public void postChannel(String name, String maxVideos, String maxComments, String token) {
-        Channel canal = getChannelAllInfo(name, maxVideos, maxComments, token);
+    public void postChannel(String channelId, String maxVideos, String maxComments, String token) {
+        Channel canal = getChannelAllInfo(channelId, maxVideos, maxComments, token);
         String uriVideoMiner = "http://localhost:8080/videominer/channels/"+canal.getId()+"?maxVideos="+maxVideos+"&maxComments="+maxComments;
         aiss.youtubeMiner.model.videominer.Channel canalVideoMiner = new aiss.youtubeMiner.model.videominer.Channel();
 

@@ -1,5 +1,6 @@
 package aiss.youtubeMiner.controller;
 
+import aiss.youtubeMiner.exception.ChannelNotFoundException;
 import aiss.youtubeMiner.model.youtube.channel.Channel;
 import aiss.youtubeMiner.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,14 @@ public class ChannelController {
     ChannelService channelService;
 
     @GetMapping("/channels/{name}")
-    public Channel findById(@PathVariable String name, String maxVideos, String maxComments, String token) {
-        Channel channel = channelService.getChannelAllInfo(name, maxVideos, maxComments, token);
-        return channel;
+    public Channel findById(@PathVariable String name, String maxVideos, String maxComments, String token) throws ChannelNotFoundException {
+        try{
+            Channel channel = channelService.getChannelAllInfo(name, maxVideos, maxComments, token);
+            return channel;
+        } catch (ChannelNotFoundException err) {
+            throw err;
+        }
+
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -33,14 +33,10 @@ public class ChannelService {
         return channel;
     }
 
-    public List<Channel> listChannelById(String id, String token) throws ChannelNotFoundException{
+    public List<Channel> listChannelById(String id, String token) {
         String uri = "https://www.googleapis.com/youtube/v3/channels?key="+token+"&part=snippet&id="+id;
         Channel[] channels = restTemplate.getForObject(uri, Channel[].class);
-        List<Channel> channelsList= Arrays.stream(channels).toList();
-        if(channelsList.isEmpty()) {
-            throw new ChannelNotFoundException();
-        }
-        return channelsList;
+        return Arrays.stream(channels).toList();
     }
 
     public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token) {

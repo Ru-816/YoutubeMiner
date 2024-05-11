@@ -4,15 +4,18 @@ import aiss.youtubeMiner.model.videominer.User;
 import aiss.youtubeMiner.model.videominer.Video;
 import aiss.youtubeMiner.model.youtube.caption.Caption;
 import aiss.youtubeMiner.model.youtube.channel.Channel;
+import aiss.youtubeMiner.model.youtube.channel.ChannelSearch;
 import aiss.youtubeMiner.model.youtube.comment.Comment;
 import aiss.youtubeMiner.model.youtube.videoSnippet.VideoSnippet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ChannelService {
@@ -34,7 +37,8 @@ public class ChannelService {
 
     public Channel listChannelById(String id, String token) {
         String uri = "https://www.googleapis.com/youtube/v3/channels?key="+token+"&part=snippet&id="+id;
-        // Channel[] channels = restTemplate.getForObject(uri, Channel[].class);
+        //ResponseEntity<Channel> channel = restTemplate.getForEntity(uri, Channel.class);
+        //return channel.getBody();
         Channel channel = restTemplate.getForObject(uri, Channel.class);
         return channel;
     }

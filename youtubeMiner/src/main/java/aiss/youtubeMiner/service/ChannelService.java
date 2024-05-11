@@ -37,15 +37,15 @@ public class ChannelService {
 
     public Channel listChannelById(String id, String token) {
         String uri = "https://www.googleapis.com/youtube/v3/channels?key="+token+"&part=snippet&id="+id;
-        //ResponseEntity<Channel> channel = restTemplate.getForEntity(uri, Channel.class);
-        //return channel.getBody();
-        Channel channel = restTemplate.getForObject(uri, Channel.class);
-        return channel;
+        ResponseEntity<ChannelSearch> response = restTemplate.getForEntity(uri, ChannelSearch.class);
+        return Objects.requireNonNull(response.getBody()).getItems().get(0);
+        //Channel channel = restTemplate.getForObject(uri, Channel.class);
+        //return channel;
     }
 
     public Channel getChannelAllInfo(String channelId, String maxVideos, String maxComments, String token){
         Channel canal = listChannelById(channelId,token);
-        List<VideoSnippet> videosDelCanal = videoService.listVideoByChannelId(canal.getId(), token, maxVideos);
+        List<VideoSnippet> videosDelCanal = videoService.listVideoByChannelId(channelId, token, maxVideos);
         for(VideoSnippet video: videosDelCanal){
             List<Comment> comentarios = commentsService.listCommentsByVideoId(video.getId().getVideoId(), token, maxComments);
             video.setComments(comentarios);
@@ -58,7 +58,7 @@ public class ChannelService {
 
     public void postChannel(String channelId, String maxVideos, String maxComments, String token) {
         Channel canal = getChannelAllInfo(channelId, maxVideos, maxComments, token);
-        String uriVideoMiner = "http://localhost:8080/videominer/channels/"+canal.getId()+"?maxVideos="+maxVideos+"&maxComments="+maxComments;
+        String uriVideoMiner = "http://localhost:8081/videominer/channels";
         aiss.youtubeMiner.model.videominer.Channel canalVideoMiner = new aiss.youtubeMiner.model.videominer.Channel();
 
         canalVideoMiner.setId(canal.getId());
@@ -118,7 +118,7 @@ public class ChannelService {
     private User crearUser(Comment comentario){
         User usuario = new User();
 
-        usuario.setId(Long.valueOf(comentario.getCommentSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue()));
+        //usuario.setId(comentario.getCommentSnippet().getTopLevelComment().getSnippet().getAuthorChannelId().getValue());
         usuario.setName(comentario.getCommentSnippet().getTopLevelComment().getSnippet().getAuthorDisplayName());
         usuario.setUser_link(comentario.getCommentSnippet().getTopLevelComment().getSnippet().getAuthorChannelUrl());
         usuario.setPicture_link(comentario.getCommentSnippet().getTopLevelComment().getSnippet().getAuthorProfileImageUrl());

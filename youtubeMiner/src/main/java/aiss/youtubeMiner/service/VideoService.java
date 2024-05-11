@@ -25,10 +25,10 @@ public class VideoService {
 
     public List<VideoSnippet> listVideoByChannelId(String channelId, String token, String maxVideos) {
         String uri = "https://www.googleapis.com/youtube/v3/search?key="+token+"&part=snippet&channelId="+channelId+"&maxResults="+maxVideos+"&type=video";
-        //ResponseEntity<VideoSnippetSearch> response = restTemplate.getForEntity(uri, VideoSnippetSearch.class);
-        //return Objects.requireNonNull(response.getBody()).getItems();
-        VideoSnippetSearch response = restTemplate.getForObject(uri, VideoSnippetSearch.class);
-        return response.getItems();
+        ResponseEntity<VideoSnippetSearch> response = restTemplate.getForEntity(uri, VideoSnippetSearch.class);
+        return Objects.requireNonNull(response.getBody()).getItems();
+        //VideoSnippetSearch response = restTemplate.getForObject(uri, VideoSnippetSearch.class);
+        //return response.getItems();
     }
 
 
